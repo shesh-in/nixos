@@ -16,38 +16,38 @@
 	style = ''
 	    * { 
 	        all: unset;
-		font-family: "JetBrainsMono";
-		font-size: 12px;
+		    font-family: "JetBrainsMono";
+    		font-size: 12px;
 	    }
 	    
 	    #window {
 	        background-color: #292a37;
-		border-radius: 0px;
+    		border-radius: 0px;
 	    }
 
 	    #outer-box {
 	        background-color: #292a37;
-		border: 3px solid #44465c;
-		border-radius: 0px;
+    		border: 3px solid #44465c;
+	    	border-radius: 0px;
 	    }
 
 	    #input {
 	        margin: 1rem;
-		padding: 0.5rem;
-		border-radius: 0px;
-		background-color: #303241;
+    		padding: 0.5rem;
+	    	border-radius: 0px;
+	    	background-color: #303241;
 	    }
 
 	    #entry {
 	        margin: 0.25rem 0.75rem 0.25rem 0.75rem;
 	        padding: 0.25rem 0.75rem 0.25rem 0.75rem;
-		color: #9699b7;
-		border-radius: 0px;
+    		color: #9699b7;
+	    	border-radius: 0px;
 	    }
 
 	    #entry:selected {
 	        background-color: #303241;
-		color: #d9e0ee;
+    		color: #d9e0ee;
 	    }
 
 	'';

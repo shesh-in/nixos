@@ -12,22 +12,24 @@
 
     environment.systemPackages = with pkgs; [
     	neovim			# текстовый редактор
-	networkmanager		# подключение к сети
-	zsh			# шелл
+	    networkmanager		# подключение к сети
+	    zsh			# шелл
 
 
-	grub2			# загрузчик ос
-	os-prober		# для multi-boot
-	efibootmgr		# управление UEFI
+	    grub2			# загрузчик ос
+	    os-prober		# для multi-boot
+	    efibootmgr		# управление UEFI
 	
-	git
-	home-manager		# утилита для конфигурации пользователя
+	    git
+	    home-manager		# утилита для конфигурации пользователя
 
-	sysstat			# набор программ для отслеживания состояния системы
-	lm_sensors		# команда sensors - температура процессора
-	udisks			# подключение removable drives
-	htop			# таблица процессов
+	    sysstat			# набор программ для отслеживания состояния системы
+	    lm_sensors		# команда sensors - температура процессора
+	    udisks			# подключение removable drives
+	    htop			# таблица процессов
 	
+        tmux            # мультиплексор
+
     	tree			# показывает структуру директорий
     ];
 }

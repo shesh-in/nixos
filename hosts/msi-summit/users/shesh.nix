@@ -3,12 +3,12 @@
 { config, lib, pkgs, ... }: {
     imports = [
     	# Пакеты пользователя
-	../../../packages/graphics.nix
-	../../../packages/fonts.nix
+	    ../../../packages/graphics.nix
+	    ../../../packages/fonts.nix
 
-	# Конфиги
-	../../../apps/wofi/msi.nix
-	../../../apps/git/main.nix
+	    # Конфиги
+	    ../../../apps/wofi/msi.nix
+	    ../../../apps/git/main.nix
     ];
 
     home.username = "shesh";

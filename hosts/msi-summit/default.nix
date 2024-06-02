@@ -8,27 +8,27 @@
     imports = [
     	# Индивидуальные для машины файлы
     	./system/hardware-configuration.nix 	# Сгенерирован автоматически, не трогать
-	./system/version.nix			# Сгенерирован автоматически, не трогать
-	./system/swap.nix			# Обеспечивает гибернацию
+	    ./system/version.nix			# Сгенерирован автоматически, не трогать
+	    ./system/swap.nix			# Обеспечивает гибернацию
 	
-	# Создание пользователей
-	./users/create.nix
+	    # Создание пользователей
+	    ./users/create.nix
 
-	# Загрузчик 
-	../../boot/grub2-multiboot.nix  # grub2 с включённым os-prober
+	    # Загрузчик 
+	    ../../boot/grub2-multiboot.nix  # grub2 с включённым os-prober
     
-    # Основные настройки
-	../../basics/main-hypr.nix		# Локали, дефолтный шелл, etc.
+        # Основные настройки
+	    ../../basics/main-hypr.nix		# Локали, дефолтный шелл, etc.
 
 
-    # SSH
-    ../../apps/ssh/pc.nix           # Только по паролю, без рута
+        # SSH
+        ../../apps/ssh/pc.nix           # Только по паролю, без рута
 
-	# Пакеты, доступные руту.
-	# Остальные пакеты определяются для каждого пользователя в его файле. 
-	../../packages/systemwide.nix
+	    # Пакеты, доступные руту.
+	    # Остальные пакеты определяются для каждого пользователя в его файле. 
+	    ../../packages/systemwide.nix
 
-	../../configuration.nix 
+	    ../../configuration.nix 
     ];
 
     # Имя хоста

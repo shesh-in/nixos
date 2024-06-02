@@ -3,10 +3,10 @@
 { config, lib, pkgs, ... }: {
     users.users.shesh = {
         isNormalUser = true;
-	home = "/home/shesh";
-	extraGroups = [ 
-	    "wheel"
-	    "networkmanager"
-	];
+	    home = "/home/shesh";
+	    extraGroups = [ 
+	        "wheel"
+	        "networkmanager"
+    	];
     };
 }

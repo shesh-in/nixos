@@ -5,16 +5,16 @@
 { config, lib, pkgs, ... }: {
     
     swapDevices = [ {
-	device = "/btrfs/@swap/swapfile";
-	size = 24 * 1024; # в мегабайтах
+	    device = "/btrfs/@swap/swapfile";
+	    size = 24 * 1024; # в мегабайтах
     } ];
 
     boot.kernelParams = [ 
     	# offset получить с помощью
-	# $ btrfs inspect-internal map-swapfile -r /btrfs/@swap/swapfile
+	    # $ btrfs inspect-internal map-swapfile -r /btrfs/@swap/swapfile
     	"resume_offset=533760" 
-	# uuid уже расшифрованного диска
-	"resume=UUID=e2ca6468-6a92-4fd6-84ff-88873ba02d12"
+	    # uuid уже расшифрованного диска
+	    "resume=UUID=e2ca6468-6a92-4fd6-84ff-88873ba02d12"
     ];
 
     # Этот параметр буквально выключает гибернацию, без него ничего не работает
