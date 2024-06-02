@@ -7,6 +7,7 @@
 	wofi 		# меню
 	eww-wayland	# виджеты
 	alacritty	# терминал 
+    tmux        # мультиплексор для терминала
 	clipman		# буфер обмена
 
 	brightnessctl	# управление яркостью
