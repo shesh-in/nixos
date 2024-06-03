@@ -8,6 +8,8 @@
 	    eww-wayland	# виджеты
 	    alacritty	# терминал 
 
+        wl-clipboard
+
         grim        # для скриншотов
         slurp   
 
