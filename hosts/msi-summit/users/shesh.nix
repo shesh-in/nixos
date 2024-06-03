@@ -5,6 +5,7 @@
     	# Пакеты пользователя
 	    ../../../packages/graphics.nix
 	    ../../../packages/fonts.nix
+        ../../../packages/software.nix
 
 	    # Конфиги
 	    ../../../apps/wofi/msi.nix
