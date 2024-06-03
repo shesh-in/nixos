@@ -10,5 +10,6 @@
 
 	    brightnessctl	# управление яркостью
 	    wev		        # перехватывает input events
+        xorg.xlsclients # посмотреть, что работает на иксах
     ];
 }
