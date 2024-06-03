@@ -10,7 +10,5 @@
 
 	    brightnessctl	# управление яркостью
 	    wev		        # перехватывает input events
-
-        github-desktop  # gui для гита
     ];
 }
