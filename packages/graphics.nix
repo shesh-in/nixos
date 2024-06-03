@@ -7,9 +7,10 @@
 	    wofi 		# меню
 	    eww-wayland	# виджеты
 	    alacritty	# терминал 
-	    clipman		# буфер обмена
 
 	    brightnessctl	# управление яркостью
-	    wev		# перехватывает input events
+	    wev		        # перехватывает input events
+
+        github-desktop  # gui для гита
     ];
 }
