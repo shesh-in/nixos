@@ -8,6 +8,9 @@
 	    eww-wayland	# виджеты
 	    alacritty	# терминал 
 
+        grim        # для скриншотов
+        slurp   
+
 	    brightnessctl	# управление яркостью
 	    wev		        # перехватывает input events
         xorg.xlsclients # посмотреть, что работает на иксах
