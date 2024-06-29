@@ -5,12 +5,6 @@
         hugo        # статические сайты
         musescore   # софт для музыкальной нотации
         calibre     # читалка
+        xdg-utils    # дефолтные приложения
     ];
-
-    home.xdg.mimeApps = {
-        enable = true;
-        defaultApplications = {
-            "application/pdf" = ["org.pwmt.zathura.desktop"];
-        };
-    };
 }

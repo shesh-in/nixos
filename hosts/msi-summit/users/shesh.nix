@@ -18,6 +18,11 @@
     # Включить home-manager
     programs.home-manager.enable = true;
 
+
+    xdg.mimeApps.defaultApplications = {
+        "application/pdf" = ["zathura.desktop"];
+    };
+
     # Не трогать.
     home.stateVersion = "23.11";
 }
