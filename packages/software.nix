@@ -4,5 +4,6 @@
     home.packages = with pkgs; [
         hugo        # статические сайты
         musescore   # софт для музыкальной нотации
+        calibre     # читалка
     ];
 }
