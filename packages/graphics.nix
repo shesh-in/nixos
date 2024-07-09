@@ -17,5 +17,7 @@
 	    wev		        # перехватывает input events
         xorg.xlsclients # посмотреть, что работает на иксах
         xwayland        # слой совместимости с иксами
+
+        wlr-randr       # чтобы убрать blur
     ];
 }
