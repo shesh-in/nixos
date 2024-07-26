@@ -7,5 +7,7 @@
         calibre     # читалка
         xdg-utils    # дефолтные приложения
         tor-browser # браузер
+
+        libsForQt5.dolphin     # проводник
     ];
 }
