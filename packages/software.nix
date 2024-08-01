@@ -8,5 +8,6 @@
         tor-browser # браузер
 
         libsForQt5.dolphin     # проводник
+        texstudio
     ];
 }
