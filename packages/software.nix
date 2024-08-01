@@ -9,6 +9,6 @@
 
         libsForQt5.dolphin     # проводник
         texstudio
-        texliveTeTeX
+        texliveFull
     ];
 }
