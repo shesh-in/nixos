@@ -10,5 +10,9 @@
         libsForQt5.dolphin     # проводник
         texstudio
         texliveFull
+    
+        python312.withPackages (ppkgs: [
+            ppkgs.pandas
+        ])
     ];
 }
