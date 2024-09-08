@@ -33,5 +33,13 @@
     	tree			# показывает структуру директорий
 
         clipman         # буфер обмена
+
+        (python3.withPackages(ps: with ps; [ 
+            numpy 
+            pandas
+            matplotlib
+            scikit-learn
+            scipy
+        ]))
     ];
 }
