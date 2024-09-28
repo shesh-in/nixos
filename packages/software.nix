@@ -12,6 +12,8 @@
         texliveFull
 
         python3
+
+        puddletag
      ];
 
 }
