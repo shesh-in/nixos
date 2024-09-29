@@ -13,7 +13,8 @@
 
         python3
 
-        puddletag
+        kid3
+
      ];
 
 }
