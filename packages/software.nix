@@ -13,8 +13,9 @@
 
         python3
 
-        kid3
+        puddletag
 
+        zoom
      ];
 
 }
