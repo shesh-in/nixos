@@ -1,58 +1,75 @@
-# Точка входа.
-
 {
-    description = "Shesh's NixOS configuration.";
+  description = "Shesh's NixOS configuration.";
 
-    inputs = {
-	    nixpkgs.url = "github:NixOS/nixpkgs/nixos-23.11";
+  nixConfig = {
+    extra-substituters = [
+      "https://hyprland.cachix.org"
+      "https://nixpkgs.cachix.org"
+      "https://nixpkgs-wayland.cachix.org"
+    ];
+    extra-trusted-public-keys = [
+      "hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="
+      "nixpkgs.cachix.org-1:q91R6hxbwFvDqTSDKwDAV4T5PxqXGxswD8vhONFMeOE="
+      "nixpkgs-wayland.cachix.org-1:3lwxaILxMRkVhehr5StQprHdEo4IrE8sRho9R9HOLYA="
+    ];
+  };
 
-	    # home-manager позволяет настраивать пользовательское окружение,
-	    # т.е. конфижить не system-wide, а для конкретных пользователей.
-	    home-manager = {
-	        url = "github:nix-community/home-manager/release-23.11";
-	        inputs.nixpkgs.follows = "nixpkgs";
-	    };
+  inputs = {
+    nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
+    nixos-hardware.url = "github:NixOS/nixos-hardware";
+    home-manager = {
+      url = "github:nix-community/home-manager";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
+    agenix = {
+      url = "github:ryantm/agenix";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.home-manager.follows = "home-manager";
+    };
+  };
 
-    outputs = { self, nixpkgs, home-manager, ... }@inputs: {
-	    nixosConfigurations = {
+  outputs =
+    inputs@{
+      nixpkgs,
+      nixos-hardware,
+      home-manager,
+      agenix,
+      ...
+    }:
+    {
+      formatter.x86_64-linux = nixpkgs.legacyPackages.x86_64-linux.nixfmt-rfc-style;
 
-	        # Здесь определяются различные сборки системы. 
-    	    # При выполнении nixos-rebuild switch ищется файл /etc/nixos/flake.nix,
-	        # а затем в его секции outputs проверяется наличие атрибута nixosConfigurations.hostname,
-	        # где hostname - это имя хоста машины, на которой запускается команда. 
-    	    # Затем определение этого атрибута используется для конфигурации системы.
-    
-	        # Отключить автоопределение атрибута по имени хоста можно:
-	        # для этого надо задать его явно вместе с самим файлом:
-	        # $ sudo nixos-rebuild switch --flake /path/to/this/flake#preferred-hostname
+      nixosConfigurations = 
+      {
+        msi-summit = nixpkgs.lib.nixosSystem {
+          system = "x86_64-linux";
+          modules = 
+          [
+            #./users/shesh/base.nix
+            #./environments/common.nix
+            #./environments/desktop.nix
+            ./machines/msi-summit/default.nix
+            ./hosts/msi-summit/default.nix
 
-    	    # Выгрузка сброки с Github:
-	        # $ sudo nixos-rebuild switch --flake github:owner/repo#hostname
-
-	        # Основная ветка - ноутбук MSI Summit
-	        msi-summit = nixpkgs.lib.nixosSystem {
-	            system = "x86_64-linux";
-	            modules = [ 
-	    	        # Здесь включаются файлы, которые он будет смотреть дальше. 
-		            # В данном конфиге здесь идёт перенаправление на 
-		            # файл соответствующей машины в каталоге hosts, 
-		            ./hosts/msi-summit/default.nix  # тут определяются все настройки машины
-		    	                			        # включая создание пользователей
-		    
-    
-	        	    # ещё тут включается home-manager
-	        	    # и устанавливается взаимно-однозначное соответствие
-	    	        # между каждым пользователем и его home-файлом.
-		            home-manager.nixosModules.home-manager {
-    		            home-manager.useGlobalPkgs = true;
-	    	            home-manager.useUserPackages = true;
-		        	    # Здесь задаётся взаимно-однозначное соответствие между 
-	            		# пользователями и их файлами.
-	        	    	home-manager.users.shesh = import ./hosts/msi-summit/users/shesh.nix;
-		            }
-	            ];
-	        };
-    	};
+            agenix.nixosModules.default
+            home-manager.nixosModules.home-manager {
+                home-manager = {
+                    useGlobalPkgs = true;
+                    useUserPackages = true;
+                    extraSpecialArgs = { inherit inputs; };
+                    users.shesh = {
+                      imports = [
+                        #./users/shesh/home.nix
+                        #./dotfiles/common.nix
+                        #./dotfiles/desktop.nix
+                        ./hosts/msi-summit/users/shesh.nix
+                      ];
+                    };
+                };
+            }
+          ];
+          specialArgs = { inherit inputs; hostName = "msi-summit"; };
+        };
+      };
     };
 }
