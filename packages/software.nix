@@ -15,7 +15,12 @@
 
         puddletag
 
-        zoom
-     ];
+        zoom-us
+        tun2socks
+
+        R
+        testdisk
+        vlc
+    ];
 
 }
