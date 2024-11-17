@@ -7,9 +7,9 @@
     
     imports = [
     	# Индивидуальные для машины файлы
-    	#./system/hardware-configuration.nix 	# Сгенерирован автоматически, не трогать
-	    #./system/version.nix			# Сгенерирован автоматически, не трогать
-	    #./system/swap.nix			# Обеспечивает гибернацию
+    	./system/hardware-configuration.nix 	# Сгенерирован автоматически, не трогать
+	    ./system/version.nix			# Сгенерирован автоматически, не трогать
+	    ./system/swap.nix			# Обеспечивает гибернацию
 	
 	    # Создание пользователей
 	    ./users/create.nix

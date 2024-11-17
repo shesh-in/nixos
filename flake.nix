@@ -48,7 +48,7 @@
             #./users/shesh/base.nix
             #./environments/common.nix
             #./environments/desktop.nix
-            ./machines/msi-summit/default.nix
+            #./machines/msi-summit/default.nix
             ./hosts/msi-summit/default.nix
 
             agenix.nixosModules.default
