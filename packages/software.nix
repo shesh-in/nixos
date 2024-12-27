@@ -34,6 +34,5 @@
 
     ];
 
-    programs.steam.enable = true;
 
 }
