@@ -1,9 +1,9 @@
 { config, lib, pkgs, ... }: {
 
     environment.systemPackages = with pkgs; [
-        grub2
+    #    grub2
     #    os-prober
-        efibootmgr
+    #    efibootmgr
     ];
 
     boot.loader = {
