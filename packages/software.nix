@@ -21,6 +21,11 @@
         R
         testdisk
         vlc
+
+        alsa-utils
+
+        virtualenv
+
     ];
 
 }
