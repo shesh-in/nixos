@@ -7,7 +7,7 @@
             ];
         };
         overlays = [
-            (import ../dotfiles/plymouth) 
+            (import ../dotfiles/plymouth/define.nix) 
         ];
     };
 }
