@@ -1,13 +1,15 @@
 {
-  pkgs ? import <nixpkgs> {}
+  pkgs ? import <nixpkgs> {},
+  lib, ...
 }:
 pkgs.stdenv.mkDerivation rec {
   pname = "adi1090x-plymouth";
   version = "0.0.1";
 
-  src = builtins.fetchGit {
+  src = pkgs.fetchgit {
     url = "https://github.com/adi1090x/plymouth-themes";
-  };
+    sha256 = "sha256-e3lRgIBzDkKcWEp5yyRCzQJM6yyTjYC5XmNUZZroDuw=";
+   };
 
   buildInputs = [
     pkgs.git
