@@ -48,7 +48,7 @@
             ./machines/msi-summit/hardware-configuration.nix
             ./machines/msi-summit/swap.nix
 
-            ./options/grub2-multiboot.nix
+            #./options/grub2-multiboot.nix
 
             ./users/shesh/base.nix
             
