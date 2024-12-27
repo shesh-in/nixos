@@ -26,5 +26,6 @@
         enable = true;
         themePackages = [ pkgs.adi1090x-plymouth ];
         theme = "dna";
+        font = ../items/JetBrainsMono.ttf;
     };
 }
