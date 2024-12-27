@@ -2,7 +2,7 @@
 
     environment.systemPackages = with pkgs; [
         grub2
-        os-prober
+        #os-prober
         efibootmgr
     ];
 
@@ -16,7 +16,7 @@
     	    devices = [ "nodev" ];
     	    enable = true;
     	    efiSupport = true;
-    	    useOSProber = true;
+    	    useOSProber = false;
     	};
     };
 }
