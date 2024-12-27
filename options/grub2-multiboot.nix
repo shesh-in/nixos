@@ -1,10 +1,10 @@
 { config, lib, pkgs, ... }: {
 
-    #environment.systemPackages = with pkgs; [
-    #    grub2
+    environment.systemPackages = with pkgs; [
+        grub2
     #    os-prober
-    #    efibootmgr
-    #];
+        efibootmgr
+    ];
 
     boot.loader = {
         systemd-boot.enable = false;

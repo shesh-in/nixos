@@ -20,8 +20,5 @@
         zip
         unzip
 
-        grub2
-        os-prober
-        efibootmgr
     ];
 }
