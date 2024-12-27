@@ -19,4 +19,12 @@
     	    useOSProber = false;
     	};
     };
+
+    boot.initrd.systemd.enable = true; 
+    boot.kernelParams = ["quiet"];
+    boot.plymouth = {
+        enable = true;
+        themePackages = [ pkgs.adi1090x-plymouth ];
+        theme = "lone";
+    };
 }

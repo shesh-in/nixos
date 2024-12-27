@@ -6,5 +6,8 @@
                 "electron-25.9.0"
             ];
         };
+        overlays = [
+            (import ../dotfiles/plymouth) 
+        ];
     };
 }
