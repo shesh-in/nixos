@@ -31,7 +31,7 @@
         zathura
         keepassxc
         pinta
-
+    
     ];
 
 
