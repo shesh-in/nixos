@@ -10,7 +10,8 @@
         ../packages/root.nix
     ];
 
-   
+    boot.kernelPackages = pkgs.linuxPackages_latest;
+
     programs.neovim = {
         enable = true;
         defaultEditor = true;
