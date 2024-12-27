@@ -1,5 +1,5 @@
 {
-  description = "Shesh's NixOS configuration.";
+  description = "Shesh's NixOS system configurations.";
 
   nixConfig = {
     extra-substituters = [
@@ -37,7 +37,7 @@
       ...
     }:
     {
-      formatter.x86_64-linux = nixpkgs.legacyPackages.x86_64-linux.nixfmt-rfc-style;
+      formatter.x86_64-linux = nixpkgs.legacyPackages.x86_64-linux.nixfmt-rfc-style; 
 
       nixosConfigurations = 
       {
@@ -45,24 +45,31 @@
           system = "x86_64-linux";
           modules = 
           [
-            #./users/shesh/base.nix
-            #./environments/common.nix
-            #./environments/desktop.nix
-            #./machines/msi-summit/default.nix
-            ./hosts/msi-summit/default.nix
+            ./machines/msi-summit/hardware-configuration.nix
+            ./machines/msi-summit/swap.nix
+
+            ./options/grub2-multiboot.nix
+
+            ./users/shesh/base.nix
+            
+            ./environments/desktop.nix
 
             agenix.nixosModules.default
+
             home-manager.nixosModules.home-manager {
+                system.stateVersion = "23.11";
                 home-manager = {
                     useGlobalPkgs = true;
                     useUserPackages = true;
                     extraSpecialArgs = { inherit inputs; };
                     users.shesh = {
                       imports = [
-                        #./users/shesh/home.nix
-                        #./dotfiles/common.nix
-                        #./dotfiles/desktop.nix
-                        ./hosts/msi-summit/users/shesh.nix
+                        ./users/shesh/home.nix
+                        
+                        ./packages/graphic-minimal.nix
+                        ./packages/software.nix
+
+                        ./dotfiles/wofi/1920x1200.nix
                       ];
                     };
                 };

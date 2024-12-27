@@ -1,5 +1,3 @@
-# Шрифты.
-
 { config, lib, pkgs, home, ... }: {
     # Устанавливает один шрифт из пакета nerdfonts
     fonts.fontconfig.enable = true;

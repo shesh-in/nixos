@@ -1,7 +1,11 @@
-# Описание загрузчика GRUB2 с поддержкой запуска нескольких операционных систем. 
-# Загрузчик расположен в /boot.
-
 { config, lib, pkgs, ... }: {
+
+    environment.systemPackages = with pkgs; [
+        grub2
+        os-prober
+        efibootmgr
+    ];
+
     boot.loader = {
         systemd-boot.enable = false;
 	    efi = {

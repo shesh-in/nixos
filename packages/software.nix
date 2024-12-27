@@ -1,13 +1,10 @@
-# Пользовательские программы.
-
 { config, lib, pkgs, ... }: {
     home.packages = with pkgs; [
-        hugo        # статические сайты
         musescore   # софт для музыкальной нотации
-        xdg-utils    # дефолтные приложения
-        tor-browser # браузер
+        xdg-utils    
+        tor-browser 
 
-        libsForQt5.dolphin     # проводник
+        libsForQt5.dolphin  
         texstudio
         texliveFull
 
@@ -16,7 +13,6 @@
         puddletag
 
         zoom-us
-        tun2socks
 
         R
         testdisk
@@ -24,8 +20,20 @@
 
         alsa-utils
 
-        virtualenv
+        python3
+
+        telegram-desktop
+        firefox-devedition
+        steam
+        anki
+        obsidian
+        syncthing
+        zathura
+        keepassxc
+        pinta
 
     ];
+
+    programs.steam.enable = true;
 
 }
