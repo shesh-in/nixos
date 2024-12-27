@@ -11,6 +11,6 @@
               "networkmanager"
             ];
             hashedPassword = "$y$j9T$TphlBhSjbWc9cojvkR7FX.$KLYFmMgm4DOxzzPrxqYDdKvicoI.sWpB5pychYIUip8";
-        }
-    }
+        };
+    };
 }
