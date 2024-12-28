@@ -2,6 +2,7 @@
 {
     imports = [
         ./common.nix
+        ../dotfiles/tuigreet
         ../options/sound.nix
     ];
 
