@@ -3,9 +3,9 @@
     programs.regreet = {
         enable = true;
 
-        font.name = "JetBrainsMonoNLNerdFont-Regular";
-        font.package = pkgs.ner-fonts.jetbrains-mono;
-        font.size = 16;
+        #font.name = "JetBrainsMonoNLNerdFont-Regular";
+        #font.package = pkgs.nerd-fonts.jetbrains-mono;
+        #font.size = 16;
 
        # settings = {
         #    
