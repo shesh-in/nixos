@@ -20,3 +20,4 @@
 
 # TO-DO 
 - Разобраться, как пользоваться agenix.
+- Поставить JetBrainsMono в TTY, см. [тут](https://www.reddit.com/r/linuxquestions/comments/7st7hz/any_way_to_convert_ttf_files_to_psf_files/)
