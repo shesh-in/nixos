@@ -3,6 +3,7 @@
     imports = [
         ../options/locale.nix
         ../options/networking.nix
+        ../options/console.nix
         ../options/nix.nix
         ../options/nixpkgs.nix
         ../options/ssh.nix
