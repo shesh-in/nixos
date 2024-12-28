@@ -17,6 +17,7 @@
     	        enable = true;
     	        efiSupport = true;
     	        useOSProber = false;
+                timeoutStyle = "hidden";
                 theme = pkgs.stdenv.mkDerivation {
                     pname = "distro-grub-themes";
                     version = "3.1";
@@ -28,10 +29,6 @@
                     };
                     installPhase = "cp -r customize/nixos $out";
                 };
-                #theme = (pkgs.sleek-grub-theme.override {
-                #    withBanner = "Grub Bootloader";
-                #    withStyle = "orange";
-                #});
     	    };
         };
 
