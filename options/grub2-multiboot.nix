@@ -7,6 +7,7 @@
     ];
     boot = {
         loader = {
+            timeout = 0;
             systemd-boot.enable = false;
 	        efi = {
 	            canTouchEfiVariables = true;
@@ -29,6 +30,16 @@
                     };
                     installPhase = "cp -r customize/nixos $out";
                 };
+                #extraConfig = "
+                #    GRUB_HIDDEN_TIMEOUT=5
+                #    GRUB_TIMEOUT=0
+                #    GRUB_DEFAULT=0
+                #    GRUB_HIDDEN_TIMEOUT_QUIET=true
+                #    GRUB_CMDLINE_LINUX_DEFAULT=\"quiet splash\"
+                #    GRUB_RECORDFAIL_TIMEOUT=$GRUB_TIMEOUT
+                #    GRUB_FORCE_HIDDEN_MENU=true
+                #    export GRUB_FORCE_HIDDEN_MENU
+                #";
     	    };
         };
 
