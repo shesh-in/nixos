@@ -1,6 +1,6 @@
 { config, lib, pkgs, ...}:
 {
-    environment.shellAliases = {
+    programs.zsh.shellAliases = {
         _ = "sudo";
         l = "ls -alh --color = tty";
         ll = "las -l";

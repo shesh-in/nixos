@@ -19,6 +19,7 @@
         tree
         zip
         unzip
-
+        
+        trash-cli
     ];
 }
