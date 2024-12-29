@@ -5,6 +5,7 @@
         #os-prober
         efibootmgr
     ];
+    fileSystems."/boot".options = [ "umask=0077" "defaults" ];
     boot = {
         loader = {
             timeout = 0;
