@@ -7,6 +7,7 @@
         ../options/nix.nix
         ../options/nixpkgs.nix
         ../options/ssh.nix
+        ../options/aliases.nix
 
         ../packages/root.nix
     ];
