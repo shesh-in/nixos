@@ -8,7 +8,6 @@
         ../options/nixpkgs.nix
         ../options/ssh.nix
         ../options/aliases.nix
-        ../options/nixos-label.nix
 
         ../packages/root.nix
     ];
