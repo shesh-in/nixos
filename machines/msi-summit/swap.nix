@@ -22,6 +22,9 @@
 
 
     # hibernation fix https://github.com/systemd/systemd/issues/34304
+    # на grub такой проблемы не было, но на systemdboot есть. после гибернации невозможно выполнить
+    # nixos-rebuild switch, потому что systemdboot чето там делает с efi variables во время гибернации
+    # это петч, который это фиксит
     systemd.package = pkgs.systemd.overrideAttrs (old: {
         patches = old.patches ++ [ 
             (pkgs.fetchurl {
