@@ -2,6 +2,6 @@
 {
     programs.kitty = {
         enable = true;
-        themeFile = "Desert";
+        themeFile = "base2tone-desert-dark";
     };
 }

@@ -70,6 +70,7 @@
                         ./packages/software.nix
                         
                         ./dotfiles/kitty/config.nix
+
                         ./dotfiles/wofi/1920x1200.nix
                       ];
                     };
