@@ -69,7 +69,7 @@
                         ./packages/graphic-minimal.nix
                         ./packages/software.nix
                         
-                        ./dotfiles/kitty/kitty.nix
+                        ./dotfiles/kitty/config.nix
                         ./dotfiles/wofi/1920x1200.nix
                       ];
                     };
