@@ -3,7 +3,7 @@ WALLPAPER_FOLDER=/etc/nixos/dotfiles/hypr/wallpaper/earth
 
 sleep 5
 
-PRESENT_TIME=$(date +%HH)
+PRESENT_TIME=$(date +%H)
 WALLPAPER="${WALLPAPER_FOLDER}/${PRESENT_TIME}.jpg"
 
 hyprctl hyprpaper preload "$WALLPAPER"
