@@ -19,7 +19,8 @@
         tree
         zip
         unzip
-        
+       
+        busybox
         trash-cli
     ];
 }
