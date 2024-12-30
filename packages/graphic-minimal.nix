@@ -13,7 +13,7 @@
         wev
         xorg.xlsclients
         xwayland
-        hyprpaper
+        wpaperd
 
         #wlr-randr
     ];
