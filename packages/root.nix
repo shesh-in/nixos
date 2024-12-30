@@ -13,7 +13,7 @@
         sysstat
         lm_sensors
         udisks
-        htop
+        btop
         tmux
 
         tree
