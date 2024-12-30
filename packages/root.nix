@@ -21,6 +21,7 @@
         unzip
        
         busybox
+        superfile
         trash-cli
     ];
 }
