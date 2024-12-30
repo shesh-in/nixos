@@ -6,6 +6,7 @@
         #../dotfiles/tuigreet
         ../dotfiles/greetd
         ../options/sound.nix
+        ../dotfiles/timers.nix
     ];
 
     programs.hyprland.enable = true;
