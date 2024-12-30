@@ -31,7 +31,8 @@
         zathura
         keepassxc
         pinta
-    
+        
+        nekoray
     ];
 
 
