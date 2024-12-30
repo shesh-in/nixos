@@ -1,27 +1,22 @@
-{ config, lib, pkgs, home, ... }:
+{ config, lib, pkgs, ... }:
 {
-    systemd.user.timers = {
-        wallpaper-cycle = {
-            Unit = {
-                Description = "Cycling wallpapers";
-            };
-
-            Timer = {
-                OnCalendar = "* *-*-* *:00:00 Europe/Moscow"
-            };
-
-            Install = {
-                WantedBy = "timers.target";
-            };
+    systemd.timers.wallpaper = {
+        wantedBy = [ "timers.target" ];
+        timerConfig = {
+            OnCalendar = "*-*-* *:*:00";
+            Persistent = true;
+            Unit = "wallpaper.service";
         };
     };
 
-    systemd.user.targets = {
-        wallpaper-cycle = {
-            Unit = {
-                Description = "Cycling wallpapers";
-
-            };
+    systemd.services.wallpaper = {
+        script = ''
+            ${pkgs.wpaperd}/bin/wpaperctl next
+        '';
+        path = [ pkgs.wpaperd pkgs.zsh ];
+        serviceConfig = {
+            Type = "oneshot";
+            User = "shesh";
         };
     };
 }
