@@ -38,6 +38,7 @@
       nixos-hardware,
       home-manager,
       agenix,
+      nixvim,
       ...
     }:
     {
@@ -61,6 +62,7 @@
             ./dotfiles/nvim
 
             agenix.nixosModules.default
+            nixvim.nixosModules.nixvim
 
             home-manager.nixosModules.home-manager {
                 system.stateVersion = "23.11";
