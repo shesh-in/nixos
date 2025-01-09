@@ -1,6 +1,7 @@
 { pkgs, lib, config, ... }:
 {
-    programs.nixvim = {
+    programs.nixvim = lib.mkForce {
         enable = true;
+        defaultEditor = true;
     };
 }

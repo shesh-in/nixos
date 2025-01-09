@@ -59,10 +59,10 @@
             
             ./environments/desktop.nix
             
-            ./dotfiles/nvim
+            #./dotfiles/nvim
 
             agenix.nixosModules.default
-            nixvim.nixosModules.nixvim
+            #nixvim.nixosModules.nixvim
 
             home-manager.nixosModules.home-manager {
                 system.stateVersion = "23.11";
