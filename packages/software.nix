@@ -35,6 +35,9 @@
         nekoray
         prismlauncher
         coppwr
+
+        rustc
+        cargo
     ];
 
 
