@@ -7,5 +7,12 @@
         ../dotfiles/cron/wallpaper.nix
     ];
 
+    programs.steam.enable = true;
     programs.hyprland.enable = true;
+    hardware.opengl.enable = true;
+    hardware.graphics = {
+        enable = true;
+    };
+
 }
+

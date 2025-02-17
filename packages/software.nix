@@ -33,6 +33,7 @@
         pinta
         
         nekoray
+        prismlauncher
     ];
 
 
