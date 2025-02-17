@@ -38,6 +38,8 @@
 
         rustc
         cargo
+
+        bluez
     ];
 
 
