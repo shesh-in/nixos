@@ -34,6 +34,7 @@
         
         nekoray
         prismlauncher
+        coppwr
     ];
 
 
