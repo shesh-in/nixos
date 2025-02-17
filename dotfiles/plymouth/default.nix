@@ -23,8 +23,8 @@ mkdir -p $out/share/plymouth/themes/
   '';
 
   installPhase = ''
-  cp -r pack_2/dark_planet $out/share/plymouth/themes
-cat pack_2/dark_planet/dark_planet.plymouth | sed  "s@\/usr\/@$out\/@" > $out/share/plymouth/themes/dark_planet/dark_planet.plymouth
+  cp -r pack_2/dna $out/share/plymouth/themes
+cat pack_2/dna/dna.plymouth | sed  "s@\/usr\/@$out\/@" > $out/share/plymouth/themes/dna/dna.plymouth
   '';
 }
 
