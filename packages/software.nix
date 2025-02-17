@@ -40,6 +40,7 @@
         cargo
 
         bluez
+        bluetui
     ];
 
 
