@@ -1,75 +1,190 @@
-(defwidget bar []
-  (centerbox :orientation "h"
-    (workspaces)
-    (music)
-    (sidestuff)))
+;; Polling variables
+(defpoll clock_calendar :interval "1m" "date '+, %V %a'")
+(defpoll clock_date :interval "1m" "date '+%Y-%m-%d'")
+(defpoll clock_time :interval "1s" "date '+%H:%M'")
+(defpoll clock_second :interval "1s" "date '+:%S'")
 
-(defwidget sidestuff []
-  (box :class "sidestuff" :orientation "h" :space-evenly false :halign "end"
-    (metric :label "🔊"
-            :value volume
-            :onchange "amixer -D pulse sset Master {}%")
-    (metric :label ""
-            :value {EWW_RAM.used_mem_perc}
-            :onchange "")
-    (metric :label "💾"
-            :value {round((1 - (EWW_DISK["/"].free / EWW_DISK["/"].total)) * 100, 0)}
-            :onchange "")
-    time))
+(defpoll battery_percent :interval "1s" "echo -n \"$(cat /sys/class/power_supply/BAT1/capacity)\" && echo -n '%'")
+(defpoll battery_status :interval "1s" "cat /sys/class/power_supply/BAT1/status")
 
-(defwidget workspaces []
-  (box :class "workspaces"
-       :orientation "h"
-       :space-evenly true
-       :halign "start"
-       :spacing 10
-    (button :onclick "wmctrl -s 0" 1)
-    (button :onclick "wmctrl -s 1" 2)
-    (button :onclick "wmctrl -s 2" 3)
-    (button :onclick "wmctrl -s 3" 4)
-    (button :onclick "wmctrl -s 4" 5)
-    (button :onclick "wmctrl -s 5" 6)
-    (button :onclick "wmctrl -s 6" 7)
-    (button :onclick "wmctrl -s 7" 8)
-    (button :onclick "wmctrl -s 8" 9)))
+(defpoll volume_speaker :interval "10s" "wpctl get-volume @DEFAULT_AUDIO_SINK@ | awk '{printf \"%d%%\", $2 * 100}'")
+(defpoll muted_speaker :interval "10s" "wpctl get-volume @DEFAULT_AUDIO_SINK@ | grep -o M")
 
-(defwidget music []
-  (box :class "music"
-       :orientation "h"
-       :space-evenly false
-       :halign "center"
-    {music != "" ? "🎵${music}" : ""}))
+(defpoll volume_mic :interval "10s" "wpctl get-volume @DEFAULT_AUDIO_SOURCE@ | awk '{printf \"%d%%\", $2 * 100}'")
+(defpoll muted_mic :interval "10s" "wpctl get-volume @DEFAULT_AUDIO_SOURCE@ | grep -o M")
 
 
-(defwidget metric [label value onchange]
-  (box :orientation "h"
-       :class "metric"
-       :space-evenly false
-    (box :class "label" label)
-    (scale :min 0
-           :max 101
-           :active {onchange != ""}
-           :value value
-           :onchange onchange)))
+;; Reveal variables
+(defvar time_rev false)
+(defvar date_rev false)
+(defvar bat_rev false)
+(defvar speaker_rev false)
 
+;; Eww definition
+(defvar eww "/etc/profiles/per-user/$USER/bin/eww -c /etc/nixos/dotfiles/eww")
 
-
-(deflisten music :initial ""
-  "playerctl --follow metadata --format '{{ artist }} - {{ title }}' || true")
-
-(defpoll volume :interval "1s"
-  "scripts/getvol")
-
-(defpoll time :interval "10s"
-  "date '+%H:%M %b %d, %Y'")
-
+;; Window definition
 (defwindow bar
-  :monitor 0
-  :windowtype "dock"
-  :geometry (geometry :x "0%"
-                      :y "0%"
-                      :width "90%"
-                      :height "10px"
-                      :anchor "top center")
-  :reserve (struts :side "top" :distance "4%")
-  (bar))
+    :monitor 0
+    :windowtype "dock"
+    :stacking "fg"
+    :geometry (geometry 
+        :x "0%"
+        :y "0%"
+        :width "100%"
+        :anchor "top center"
+    )
+    :wm-ignore false
+    :exclusive true
+    (bar_module)
+)
+
+;; Composing the bar from three parts
+(defwidget bar_module []
+    (box 
+        :class "bar_class"
+        :orientation "h"
+        (left_module)
+        ;;(center_module)
+        (right_module)
+    )
+)
+
+;; Left, center, right
+(defwidget left_module []
+    (box 
+        :space-evenly "false"
+        :orientation "h"
+        :halign "start"
+        (volume_speaker_module)
+        (volume_mic_module)
+    )
+)
+
+(defwidget right_module []
+    (box
+        :space-evenly "false"
+        :orientation "h"
+        :halign "end"
+        (battery_module)
+        (date_module)
+        (time_module)
+    )
+)
+
+;; Battery module
+(defwidget battery_module []
+    (box
+        :orientation "horizontal"
+        :class "module"
+        (eventbox
+            :onhover "${eww} update bat_rev=true"
+            :onhoverlost "${eww} update bat_rev=false"
+            (box
+                :orientation "horizontal"
+                :class "battery_class"
+                :halign "center"
+                :space-evenly false
+                :spacing 3
+                (label :text battery_percent)
+                (revealer 
+                    :transition "slideleft"
+                    :reveal bat_rev
+                    :duration "350ms"
+                    (label :text battery_status)
+                )
+            )
+        )
+    )
+)
+
+;; date module
+(defwidget date_module []
+    (box
+        :orientation "h"
+        :class "module"
+        (eventbox
+            :onhover "${eww} update date_rev=true"
+            :onhoverlost "${eww} update date_rev=false"
+            (box
+                :orientation "horizontal" 
+                :class "clock_date_class"
+                :halign "center"
+                :space-evenly false
+                :spacing 3
+                (label :text clock_date)
+                (revealer
+                    :transition "slideleft"
+                    :reveal date_rev
+                    :duration "350ms"
+                    (label :text clock_calendar :class "clock_calendar_class")
+                )
+            )
+        )
+
+    )
+)
+
+;; time module
+(defwidget time_module []
+    (box 
+        :orientation "h"
+        :class "module"
+        (eventbox 
+            :onhover "${eww} update time_rev=true"
+            :onhoverlost "${eww} update time_rev=false"      
+            (box 
+                :orientation "horizontal"
+                :class "clock_time_class"
+                :halign "center"
+                :space-evenly false
+                ;;:spacing 3
+                (label :text clock_time )
+                (revealer 
+                    :transition "slideleft"
+                    :reveal time_rev
+                    :duration "350ms"
+                    (label :text clock_second)
+                )
+            )
+        )
+    )
+)
+
+;; volume speaker module
+(defwidget volume_speaker_module []
+    (box 
+        :orientation "h"
+        :class "module"
+        (eventbox
+            :onhover "${eww} update speaker_rev=true"
+            :onhoverlost "${eww} update speaker_rev=false"
+            (box
+                :orientation "horizontal"
+                :class "volume_speaker_class"
+                :halign "center"
+                :space-evenly false
+                (label :text muted_speaker)
+                (label :text volume_speaker)
+            )
+        )
+    )
+)
+(defwidget volume_mic_module []
+    (box 
+        :orientation "h"
+        :class "module"
+        (eventbox
+            :onhover "${eww} update mic_rev=true"
+            :onhoverlost "${eww} update mic_rev=false"
+            (box
+                :orientation "horizontal"
+                :class "volume_mic_class"
+                :halign "center"
+                :space-evenly false
+                (label :text muted_mic)
+                (label :text volume_mic)
+            )
+        )
+    )
+)
