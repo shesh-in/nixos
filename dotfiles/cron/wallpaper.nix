@@ -1,3 +1,4 @@
+# INACTIVE
 { config, lib, pkgs, ... }:
 {
     services.cron = {

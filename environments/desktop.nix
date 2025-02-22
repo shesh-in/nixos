@@ -4,7 +4,7 @@
         ./common.nix
         ../dotfiles/greetd
         ../options/sound.nix
-        ../dotfiles/cron/wallpaper.nix
+        #../dotfiles/cron/wallpaper.nix
     ];
 
     programs.steam.enable = true;

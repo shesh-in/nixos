@@ -1,4 +1,7 @@
 #! /bin/sh
+
+# INACTIVE
+
 WALLPAPER_FOLDER=/etc/nixos/dotfiles/hypr/wallpaper/earth
 
 #sleep 1
