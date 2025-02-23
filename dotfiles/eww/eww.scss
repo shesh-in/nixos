@@ -4,11 +4,14 @@
 }
 
 .bar_class {
-    background-color: #000000;
-    border-width: 0px 0px 5px 0px;
-    border-radius: 0;
+    background: rgba(0, 0, 0, 0.5);
+    border-width: 5px 5px 5px 5px;
+    border-radius: 7;
     border-style: solid;
-    border-color: #c38946;
+    //border-color: #BF9C34;
+    //color: #A66E29;
+    border-color: #A64029;
+    color: #FFFFFF;
 }
 
 .module {
@@ -16,7 +19,7 @@
 }
 
 .clock_time_class {
-  font-size: 16;
+  font-size: 32;
   margin-right: 5px
 }
 
@@ -30,9 +33,11 @@
 
 .volume_speaker_class {
   font-size:16;
+  margin: 0px 0px 0px 5px;
 }
 .volume_mic_class {
   font-size: 16;
+  margin: 0px 0px 0px 5px;
 }
 
 .volume_scale_class trough highlight {

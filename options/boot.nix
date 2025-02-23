@@ -52,7 +52,7 @@
         plymouth = {
             enable = true;
             themePackages = [ pkgs.adi1090x-plymouth ];
-            theme = "dna";
+            theme = "loader";
             font = "${pkgs.nerd-fonts.jetbrains-mono}/share/fonts/truetype/NerdFonts/JetBrainsMono/JetBrainsMonoNLNerdFont-Regular.ttf";
         };
     };

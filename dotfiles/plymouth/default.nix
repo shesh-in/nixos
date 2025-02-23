@@ -23,8 +23,8 @@ mkdir -p $out/share/plymouth/themes/
   '';
 
   installPhase = ''
-  cp -r pack_2/dna $out/share/plymouth/themes
-cat pack_2/dna/dna.plymouth | sed  "s@\/usr\/@$out\/@" > $out/share/plymouth/themes/dna/dna.plymouth
+  cp -r pack_3/loader $out/share/plymouth/themes
+cat pack_3/loader/loader.plymouth | sed  "s@\/usr\/@$out\/@" > $out/share/plymouth/themes/loader/loader.plymouth
   '';
 }
 

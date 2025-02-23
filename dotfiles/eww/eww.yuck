@@ -1,11 +1,12 @@
 ;; Polling variables
-(defpoll clock_calendar :interval "1m" "date '+, %V %a'")
+(defpoll clock_calendar :interval "1m" "date '+%V %a'")
 (defpoll clock_date :interval "1m" "date '+%Y-%m-%d'")
 (defpoll clock_time :interval "1s" "date '+%H:%M'")
 (defpoll clock_second :interval "1s" "date '+:%S'")
 
 (defpoll battery_percent :interval "1s" "echo -n \"$(cat /sys/class/power_supply/BAT1/capacity)\" && echo -n '%'")
 (defpoll battery_status :interval "1s" "cat /sys/class/power_supply/BAT1/status")
+
 
 (defpoll volume_speaker :interval "10s" "wpctl get-volume @DEFAULT_AUDIO_SINK@ | awk '{printf \"%d%%\", $2 * 100}'")
 (defpoll muted_speaker :interval "10s" "wpctl get-volume @DEFAULT_AUDIO_SINK@ | grep -o M")
@@ -15,8 +16,8 @@
 
 
 ;; Reveal variables
+(defvar bar_rev false)
 (defvar time_rev false)
-(defvar date_rev false)
 (defvar bat_rev false)
 (defvar speaker_rev false)
 
@@ -31,7 +32,7 @@
     :geometry (geometry 
         :x "0%"
         :y "0%"
-        :width "100%"
+        :width "1910px"
         :anchor "top center"
     )
     :wm-ignore false
@@ -41,12 +42,17 @@
 
 ;; Composing the bar from three parts
 (defwidget bar_module []
-    (box 
-        :class "bar_class"
-        :orientation "h"
-        (left_module)
-        ;;(center_module)
-        (right_module)
+    (revealer
+        :transition "slidedown"
+        :reveal bar_rev
+        :duration "350ms"
+        (box 
+            :class "bar_class"
+            :orientation "h"
+            (left_module)
+            ;;(center_module)
+            (right_module)
+        )
     )
 )
 
@@ -56,8 +62,11 @@
         :space-evenly "false"
         :orientation "h"
         :halign "start"
-        (volume_speaker_module)
-        (volume_mic_module)
+        (box
+            :orientation "vertical"
+            (volume_speaker_module)
+            (volume_mic_module)
+        )
     )
 )
 
@@ -77,6 +86,7 @@
     (box
         :orientation "horizontal"
         :class "module"
+        
         (eventbox
             :onhover "${eww} update bat_rev=true"
             :onhoverlost "${eww} update bat_rev=false"
@@ -107,18 +117,13 @@
             :onhover "${eww} update date_rev=true"
             :onhoverlost "${eww} update date_rev=false"
             (box
-                :orientation "horizontal" 
+                :orientation "v" 
                 :class "clock_date_class"
-                :halign "center"
+                :valign "center"
                 :space-evenly false
-                :spacing 3
+                :spacing 0
                 (label :text clock_date)
-                (revealer
-                    :transition "slideleft"
-                    :reveal date_rev
-                    :duration "350ms"
-                    (label :text clock_calendar :class "clock_calendar_class")
-                )
+                (label :text clock_calendar :class "clock_calendar_class")
             )
         )
 

@@ -41,6 +41,9 @@
 
         bluez
         bluetui
+        
+        google-cursor
+        glib
     ];
 
 
