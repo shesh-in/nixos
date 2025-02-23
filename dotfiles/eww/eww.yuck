@@ -21,6 +21,9 @@
 (defvar bat_rev false)
 (defvar speaker_rev false)
 
+;; Other variables
+(defvar keymap "main")
+
 ;; Eww definition
 (defvar eww "/etc/profiles/per-user/$USER/bin/eww -c /etc/nixos/dotfiles/eww")
 
@@ -50,7 +53,7 @@
             :class "bar_class"
             :orientation "h"
             (left_module)
-            ;;(center_module)
+            (center_module)
             (right_module)
         )
     )
@@ -67,6 +70,15 @@
             (volume_speaker_module)
             (volume_mic_module)
         )
+    )
+)
+
+(defwidget center_module []
+    (box
+        :space-evenly "false"
+        :orientation "h"
+        :halign "center"
+        (keymap_module)
     )
 )
 
@@ -105,6 +117,14 @@
                 )
             )
         )
+    )
+)
+
+(defwidget keymap_module []
+    (box
+        :class "module"
+        :class "keymap_class"
+        (label :text keymap)
     )
 )
 
