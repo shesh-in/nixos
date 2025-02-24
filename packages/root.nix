@@ -23,5 +23,8 @@
         busybox
         superfile
         trash-cli
+        jq
+
+        neofetch
     ];
 }

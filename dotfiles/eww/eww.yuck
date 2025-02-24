@@ -8,12 +8,13 @@
 (defpoll battery_status :interval "1s" "cat /sys/class/power_supply/BAT1/status")
 
 
-(defpoll volume_speaker :interval "10s" "wpctl get-volume @DEFAULT_AUDIO_SINK@ | awk '{printf \"%d%%\", $2 * 100}'")
-(defpoll muted_speaker :interval "10s" "wpctl get-volume @DEFAULT_AUDIO_SINK@ | grep -o M")
+(defpoll volume_speaker :interval "2s" "wpctl get-volume @DEFAULT_AUDIO_SINK@ | awk '{printf \"%d%%\", $2 * 100}'")
+(defpoll muted_speaker :interval "2s" "wpctl get-volume @DEFAULT_AUDIO_SINK@ | grep -o M")
 
-(defpoll volume_mic :interval "10s" "wpctl get-volume @DEFAULT_AUDIO_SOURCE@ | awk '{printf \"%d%%\", $2 * 100}'")
-(defpoll muted_mic :interval "10s" "wpctl get-volume @DEFAULT_AUDIO_SOURCE@ | grep -o M")
+(defpoll volume_mic :interval "2s" "wpctl get-volume @DEFAULT_AUDIO_SOURCE@ | awk '{printf \"%d%%\", $2 * 100}'")
+(defpoll muted_mic :interval "2s" "wpctl get-volume @DEFAULT_AUDIO_SOURCE@ | grep -o M")
 
+(defpoll workspaces :interval "2s" "/etc/nixos/dotfiles/eww/scripts/workspace.sh")
 
 ;; Reveal variables
 (defvar bar_rev false)
@@ -78,7 +79,7 @@
         :space-evenly "false"
         :orientation "h"
         :halign "center"
-        (keymap_module)
+        (workspaces_module)
     )
 )
 
@@ -87,9 +88,16 @@
         :space-evenly "false"
         :orientation "h"
         :halign "end"
+        (keymap_module)
         (battery_module)
         (date_module)
         (time_module)
+    )
+)
+
+(defwidget workspaces_module []
+    (box
+        (literal :content workspaces)
     )
 )
 
