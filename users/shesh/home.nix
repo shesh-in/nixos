@@ -18,5 +18,10 @@
             name = "GoogleDot-Blue";
             package = pkgs.google-cursor;
         };
+        font = {
+            name = "JetBrainsMonoNL NF Regular";
+            package = pkgs.nerd-fonts.jetbrains-mono;
+        };
     };
+
 }
