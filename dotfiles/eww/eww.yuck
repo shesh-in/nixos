@@ -1,32 +1,49 @@
-;; Polling variables
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;VARIABLES;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(defvar bar_rev false)
+
+(defpoll speaker_icon :interval "2s" "
+    /etc/nixos/dotfiles/eww/scripts/speaker_icon.sh
+")
+(defpoll volume_speaker :interval "2s" "
+    /etc/nixos/dotfiles/eww/scripts/volume_speaker.sh
+")
+
+(defpoll mic_icon :interval "2s" "
+    /etc/nixos/dotfiles/eww/scripts/mic_icon.sh
+")
+(defpoll volume_mic :interval "2s" "
+    /etc/nixos/dotfiles/eww/scripts/volume_mic.sh
+")
+
+(defpoll cam_icon :interval "1s" "
+    /etc/nixos/dotfiles/eww/scripts/cam_icon.sh
+")
+
+(defvar keymap "def")
+
+(defpoll battery_icon :interval "1s" "
+    /etc/nixos/dotfiles/eww/scripts/battery_icon.sh
+")
+(defpoll battery_percent :interval "1s" "/etc/nixos/dotfiles/eww/scripts/battery.sh")
+
+(defvar time_rev false)
 (defpoll clock_calendar :interval "1m" "date '+%V %a'")
 (defpoll clock_date :interval "1m" "date '+%Y-%m-%d'")
-(defpoll clock_time :interval "1s" "date '+%H:%M'")
-(defpoll clock_second :interval "1s" "date '+:%S'")
-
-(defpoll battery_percent :interval "1s" "echo -n \"$(cat /sys/class/power_supply/BAT1/capacity)\" && echo -n '%'")
-(defpoll battery_status :interval "1s" "cat /sys/class/power_supply/BAT1/status")
-
-
-(defpoll volume_speaker :interval "2s" "wpctl get-volume @DEFAULT_AUDIO_SINK@ | awk '{printf \"%d%%\", $2 * 100}'")
-(defpoll muted_speaker :interval "2s" "wpctl get-volume @DEFAULT_AUDIO_SINK@ | grep -o M")
-
-(defpoll volume_mic :interval "2s" "wpctl get-volume @DEFAULT_AUDIO_SOURCE@ | awk '{printf \"%d%%\", $2 * 100}'")
-(defpoll muted_mic :interval "2s" "wpctl get-volume @DEFAULT_AUDIO_SOURCE@ | grep -o M")
+(defpoll clock_hour :interval "1s" "date '+%H'")
+(defpoll clock_minute :interval "1s" "date '+%M'")
+(defpoll clock_second :interval "1s" "date '+%S'")
 
 (defpoll workspaces :interval "2s" "/etc/nixos/dotfiles/eww/scripts/workspace.sh")
 
 ;; Reveal variables
-(defvar bar_rev false)
-(defvar time_rev false)
-(defvar bat_rev false)
-(defvar speaker_rev false)
 
 ;; Other variables
-(defvar keymap "main")
 
 ;; Eww definition
 (defvar eww "/etc/profiles/per-user/$USER/bin/eww -c /etc/nixos/dotfiles/eww")
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;MAIN;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;; Window definition
 (defwindow bar
@@ -51,173 +68,183 @@
         :reveal bar_rev
         :duration "350ms"
         (box 
-            :class "bar_class"
+            :class "bar"
             :orientation "h"
-            (left_module)
-            (center_module)
-            (right_module)
+            (left_section)
+            (center_section)
+            (right_section)
         )
     )
 )
 
 ;; Left, center, right
-(defwidget left_module []
+(defwidget left_section []
     (box 
         :space-evenly "false"
         :orientation "h"
         :halign "start"
-        (box
-            :orientation "vertical"
-            (volume_speaker_module)
-            (volume_mic_module)
-        )
+        :class "section"
+        (volume_module)
+        (cam_module)
     )
 )
 
-(defwidget center_module []
+(defwidget center_section []
     (box
         :space-evenly "false"
         :orientation "h"
         :halign "center"
+        :class "section"
         (workspaces_module)
     )
 )
 
-(defwidget right_module []
+(defwidget right_section []
     (box
         :space-evenly "false"
         :orientation "h"
         :halign "end"
+        :class "section"
         (keymap_module)
         (battery_module)
-        (date_module)
         (time_module)
     )
 )
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;LEFT;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(defwidget volume_module []
+    (box 
+        :orientation "vertical"
+        :class "module"
+        (speaker)
+        (mic)
+    )
+)
+(defwidget speaker []
+    (box
+        :orientation "horizontal"
+        :halign "center"
+        :space-evenly false
+        (image
+            :path speaker_icon
+        )
+        (label :text volume_speaker)
+    )
+)
+(defwidget mic []
+    (box
+        :orientation "horizontal"
+        :halign "center"
+        :space-evenly false
+        (image
+            :path mic_icon
+        )
+        (label :text volume_mic)
+    )
+)
+(defwidget cam_module []
+    (box
+        :class "module" 
+        (image
+            :path cam_icon
+        )
+    )
+)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;CENTER;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
 (defwidget workspaces_module []
     (box
+        :class "module workspace"
+        :valign "center"
         (literal :content workspaces)
     )
 )
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;RIGHT;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;; Battery module
 (defwidget battery_module []
     (box
         :orientation "horizontal"
         :class "module"
-        
-        (eventbox
-            :onhover "${eww} update bat_rev=true"
-            :onhoverlost "${eww} update bat_rev=false"
-            (box
-                :orientation "horizontal"
-                :class "battery_class"
-                :halign "center"
-                :space-evenly false
-                :spacing 3
-                (label :text battery_percent)
-                (revealer 
-                    :transition "slideleft"
-                    :reveal bat_rev
-                    :duration "350ms"
-                    (label :text battery_status)
-                )
-            )
+        :halign "center" 
+        :space-evenly false
+        (image
+            :path battery_icon
         )
+        (label :text battery_percent)
     )
 )
 
 (defwidget keymap_module []
     (box
         :class "module"
-        :class "keymap_class"
+        :orientation "h"
+        :space-evenly false
+        :halign "center"
+        (image
+            :path "/etc/nixos/dotfiles/eww/icons/keymap.svg"
+        )
         (label :text keymap)
     )
 )
 
-;; date module
-(defwidget date_module []
-    (box
-        :orientation "h"
-        :class "module"
-        (eventbox
-            :onhover "${eww} update date_rev=true"
-            :onhoverlost "${eww} update date_rev=false"
-            (box
-                :orientation "v" 
-                :class "clock_date_class"
-                :valign "center"
-                :space-evenly false
-                :spacing 0
-                (label :text clock_date)
-                (label :text clock_calendar :class "clock_calendar_class")
-            )
-        )
-
-    )
-)
-
-;; time module
 (defwidget time_module []
     (box 
-        :orientation "h"
-        :class "module"
-        (eventbox 
+        :orientation "horizontal"
+        :class "module time"
+        :halign "center"
+        :space-evenly false
+        (eventbox
             :onhover "${eww} update time_rev=true"
-            :onhoverlost "${eww} update time_rev=false"      
-            (box 
-                :orientation "horizontal"
-                :class "clock_time_class"
+            :onhoverlost "${eww} update time_rev=false"
+            (box
+                :orientation "h"
                 :halign "center"
                 :space-evenly false
-                ;;:spacing 3
-                (label :text clock_time )
-                (revealer 
+                (revealer
                     :transition "slideleft"
                     :reveal time_rev
                     :duration "350ms"
-                    (label :text clock_second)
+                    (box
+                        :orientation "h"
+                        :halign "center"
+                        :space-evenly false
+                        (image
+                            :image-height 48
+                            :image-width 48
+                            :class "calendar_icon"
+                            :path "/etc/nixos/dotfiles/eww/icons/calendar.svg"
+                        )
+                        (box
+                            :orientation "v"
+                            :valign "center"
+                            :class "calendar"
+                            :space-evenly false
+                            (label :text clock_date)
+                            (label :text clock_calendar)
+                        )
+                    )
+                )
+                (image
+                    :class "clock_icon"
+                    :image-height 48
+                    :image-width 48
+                    :path "/etc/nixos/dotfiles/eww/icons/clock.svg"
                 )
             )
+        )
+        (label :class "clock_hour" :text clock_hour)
+        (box
+            :orientation "vertical"
+            :space-evenly false
+            :class "clock_min_sec"
+            :valign "center"
+            (label :text clock_minute)
+            (label :text clock_second)
         )
     )
 )
 
-;; volume speaker module
-(defwidget volume_speaker_module []
-    (box 
-        :orientation "h"
-        :class "module"
-        (eventbox
-            :onhover "${eww} update speaker_rev=true"
-            :onhoverlost "${eww} update speaker_rev=false"
-            (box
-                :orientation "horizontal"
-                :class "volume_speaker_class"
-                :halign "center"
-                :space-evenly false
-                (label :text muted_speaker)
-                (label :text volume_speaker)
-            )
-        )
-    )
-)
-(defwidget volume_mic_module []
-    (box 
-        :orientation "h"
-        :class "module"
-        (eventbox
-            :onhover "${eww} update mic_rev=true"
-            :onhoverlost "${eww} update mic_rev=false"
-            (box
-                :orientation "horizontal"
-                :class "volume_mic_class"
-                :halign "center"
-                :space-evenly false
-                (label :text muted_mic)
-                (label :text volume_mic)
-            )
-        )
-    )
-)

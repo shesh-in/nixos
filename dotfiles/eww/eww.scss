@@ -1,9 +1,9 @@
 *{
-  all: unset;
-  font-family: JetBrainsMono NF;
+    all: unset;
+    font-family: JetBrainsMono NF;
 }
 
-.bar_class {
+.bar {
     background: rgba(0, 0, 0, 0.5);
     border-width: 5px 5px 5px 5px;
     border-radius: 7;
@@ -14,42 +14,40 @@
     color: #FFFFFF;
 }
 
+.section {
+  
+}
+
 .module {
-  margin: 0px 5px 0px 0px;
-}
-
-.clock_time_class {
-  font-size: 32;
-  margin-right: 5px
-}
-
-.clock_date_class {
+  margin: 0px 5px 0px 5px;
   font-size: 16;
 }
 
-.keymap_class {
-  font-size: 16;
-  margin: 0px 5px 0px 0px
+.workspace {
+  font-size: 30; 
 }
 
-.battery_class {
-  font-size: 16;
+.time {
+    border-width: 0px 0px 0px 5px;
+    border-radius: 0;
+    border-style: solid;
+    border-color: #A64029;
+    color: #FFFFFF;
 }
-
-.workspaces_class {
-  font-size: 16;
+.calendar_icon {
+    margin: 0px 0px 0px 5px;
 }
-
-.volume_speaker_class {
-  font-size:16;
-  margin: 0px 0px 0px 5px;
+.calendar {
+    margin: 0px 0px 0px 5px;
+    font-weight: 900;
 }
-.volume_mic_class {
-  font-size: 16;
-  margin: 0px 0px 0px 5px;
+.clock_icon {
+    margin: 0px 0px 0px 5px;
 }
-
-.volume_scale_class trough highlight {
-  background-image: linear-gradient(to right, #afcee0 30%, #a1bdce 50%, #77a5bf 100% *50);
-  border-radius: 10px;
+.clock_hour {
+    font-size: 48;
+}
+.clock_min_sec {
+    font-size: 16;
+    font-weight: 900;
 }

@@ -26,5 +26,6 @@
         jq
 
         neofetch
+        yazi
     ];
 }

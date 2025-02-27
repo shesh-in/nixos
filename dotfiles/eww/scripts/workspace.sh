@@ -1,56 +1,126 @@
 #! /bin/sh
 
 workspaces() {
-    focused=$(hyprctl monitors -j | jq '.[0].activeWorkspace.id')
-    w1="1"
-    w2="2"
-    w3="3"
-    w4="4"
-    w5="5"
-    w6="6"
-    w7="7"
-    w8="8"
-    w9="9"
-    if [ $focused == $w1 ]; then
-        w1="(1)"
-    elif [ $focused == $w2 ]; then
-        w2="(2)"
-    elif [ $focused == $w3 ]; then
-        w3="(3)"
-    elif [ $focused == $w4 ]; then
-        w4="(4)"
-    elif [ $focused == $w5 ]; then
-        w5="(5)"
-    elif [ $focused == $w6 ]; then
-        w6="(6)"
-    elif [ $focused == $w7 ]; then
-        w7="(7)"
-    elif [ $focused == $w8 ]; then
-        w8="(8)"
-    elif [ $focused == $w9 ]; then
-        w9="(9)"
+    focused=$(($(hyprctl monitors -j | jq '.[0].activeWorkspace.id')))
+
+    o1=""
+    o2=""
+    o3=""
+    o4=""
+    o5=""
+    o6=""
+    o7=""
+    o8=""
+    o9=""
+
+    if [ $focused == 1 ]; then
+        o1=""
+    elif [ $focused == 2 ]; then
+        o2=""
+    elif [ $focused == 3 ]; then
+        o3=""
+    elif [ $focused == 4 ]; then
+        o4=""
+    elif [ $focused == 5 ]; then
+        o5=""
+    elif [ $focused == 6 ]; then
+        o6=""
+    elif [ $focused == 7 ]; then
+        o7=""
+    elif [ $focused == 8 ]; then
+        o8=""
+    elif [ $focused == 9 ]; then
+        o9=""
     fi
 
     echo "
     (box 
-        :class \"module\"
-        :class \"workspaces_class\"
         :halign \"center\"
         :orientation \"h\"
-        :valign \"center\"
         :space-evenly false
-        :spacing 3
-        (label :text \"$w1\")
-        (label :text \"$w2\")
-        (label :text \"$w3\")
-        (label :text \"$w4\")
-        (label :text \"$w5\")
-        (label :text \"$w6\")
-        (label :text \"$w7\")
-        (label :text \"$w8\")
-        (label :text \"$w9\")
+        :spacing 15
+        (box
+            :orientation \"v\"
+            :valign \"center\"
+            :space-evenly false
+            (button
+            :onclick \"hyprctl dispatch workspace 1 && eww -c /etc/nixos/dotfiles/eww update workspaces=\\\"\$(/etc/nixos/dotfiles/eww/scripts/workspace.sh)\\\"\"
+                (label :text \"$o1\")
+            )
+        )   
+        (box
+            :orientation \"v\"
+            :valign \"center\"
+            :space-evenly false
+            (button
+                :onclick \"hyprctl dispatch workspace 2 && eww -c /etc/nixos/dotfiles/eww update workspaces=\\\"\$(/etc/nixos/dotfiles/eww/scripts/workspace.sh)\\\"\"
+                (label :text \"$o2\")
+            )
+        )   
+        (box
+            :orientation \"v\"
+            :valign \"center\"
+            :space-evenly false
+            (button
+                :onclick \"hyprctl dispatch workspace 3 && eww -c /etc/nixos/dotfiles/eww update workspaces=\\\"\$(/etc/nixos/dotfiles/eww/scripts/workspace.sh)\\\"\"
+                (label :text \"$o3\")
+            )
+        )   
+        (box
+            :orientation \"v\"
+            :valign \"center\"
+            :space-evenly false
+            (button
+                :onclick \"hyprctl dispatch workspace 4 && eww -c /etc/nixos/dotfiles/eww update workspaces=\\\"\$(/etc/nixos/dotfiles/eww/scripts/workspace.sh)\\\"\"
+                (label :text \"$o4\")
+            )
+        )   
+        (box
+            :orientation \"v\"
+            :valign \"center\"
+            :space-evenly false
+            (button
+                :onclick \"hyprctl dispatch workspace 5 && eww -c /etc/nixos/dotfiles/eww update workspaces=\\\"\$(/etc/nixos/dotfiles/eww/scripts/workspace.sh)\\\"\"
+                (label :text \"$o5\")
+            )
+        )
+        (box
+            :orientation \"v\"
+            :valign \"center\"
+            :space-evenly false
+            (button
+                :onclick \"hyprctl dispatch workspace 6 && eww -c /etc/nixos/dotfiles/eww update workspaces=\\\"\$(/etc/nixos/dotfiles/eww/scripts/workspace.sh)\\\"\"
+                (label :text \"$o6\")
+            )
+        )   
+        (box
+            :orientation \"v\"
+            :valign \"center\"
+            :space-evenly false
+            (button
+                :onclick \"hyprctl dispatch workspace 7 && eww -c /etc/nixos/dotfiles/eww update workspaces=\\\"\$(/etc/nixos/dotfiles/eww/scripts/workspace.sh)\\\"\"
+                (label :text \"$o7\")
+            )
+        )   
+        (box
+            :orientation \"v\"
+            :valign \"center\"
+            :space-evenly false
+            (button
+                :onclick \"hyprctl dispatch workspace 8 && eww -c /etc/nixos/dotfiles/eww update workspaces=\\\"\$(/etc/nixos/dotfiles/eww/scripts/workspace.sh)\\\"\"
+                (label :text \"$o8\")
+            )
+        )   
+        (box
+            :orientation \"v\"
+            :valign \"center\"
+            :space-evenly false
+            (button
+                :onclick \"hyprctl dispatch workspace 9 && eww -c /etc/nixos/dotfiles/eww update workspaces=\\\"\$(/etc/nixos/dotfiles/eww/scripts/workspace.sh)\\\"\"
+                (label :text \"$o9\")
+            )
+        )   
     )"
 }
 
 workspaces
-
