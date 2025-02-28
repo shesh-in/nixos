@@ -44,6 +44,9 @@
         
         google-cursor
         glib
+
+        blueberry
+        xdg-desktop-portal
     ];
 
 
