@@ -4,11 +4,21 @@
         enable = true;
         settings = {
             opener = {
-                rules = [
+                open = [
                     {
                         run = "zathura \"\$@\"";
                         orphan = true;
                         name = "*.djvu";
+                    }
+                    {
+                        run = "zathura \"\$@\"";
+                        orphan = true;
+                        name = "*.epub";
+                    }
+                    {
+                        run = "acroread \"\$@\"";
+                        orphan = true;
+                        name = "*.pdf";
                     }
                 ];
             };
