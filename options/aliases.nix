@@ -6,5 +6,6 @@
         ll = "ls -l";
         grep = "grep --color=auto";
         rm = "echo \"This is not the command you are looking for.\"; false";
+        obsidian = "XDG_CURRENT_DESKTOP=GNOME obsidian";
     };
 }

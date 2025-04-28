@@ -79,7 +79,6 @@
                         
                         ./dotfiles/kitty/config.nix
                         ./dotfiles/yazi/config.nix
-                        ./dotfiles/zsh/config.nix
 
                         ./dotfiles/wofi/1920x1200.nix
                       ];
