@@ -47,6 +47,10 @@
 
         blueberry
         xdg-desktop-portal
+        xdg-desktop-portal-hyprland
+
+        adobe-reader
+
     ];
 
 
