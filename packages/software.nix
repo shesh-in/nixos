@@ -50,7 +50,8 @@
         xdg-desktop-portal-hyprland
 
         adobe-reader
-
+        
+        qbittorrent
     ];
 
 
