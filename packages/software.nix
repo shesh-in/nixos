@@ -52,6 +52,9 @@
         adobe-reader
         
         qbittorrent
+
+        factorio
+
     ];
 
 
