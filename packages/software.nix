@@ -53,7 +53,7 @@
         
         qbittorrent
 
-        factorio
+        factorio-headless
 
     ];
 
