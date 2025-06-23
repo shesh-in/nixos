@@ -53,7 +53,7 @@
         
         qbittorrent
 
-        factorio-headless
+        lutris
 
     ];
 

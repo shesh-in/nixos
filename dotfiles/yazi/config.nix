@@ -20,6 +20,21 @@
                         orphan = true;
                         name = "*.pdf";
                     }
+                    {
+                        run = "pinta \"\$@\"";
+                        orphan = true;
+                        name = "*.jpg";
+                    }
+                    {
+                        run = "pinta \"\$@\"";
+                        orphan = true;
+                        name = "*.JPG";
+                    }
+                    {
+                        run = "pinta \"\$@\"";
+                        orphan = true;
+                        name = "*.jpeg";
+                    }
                 ];
             };
         };
