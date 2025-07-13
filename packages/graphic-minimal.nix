@@ -15,5 +15,6 @@
         xwayland
         hyprpaper
         #wlr-randr
+        lf
     ];
 }
