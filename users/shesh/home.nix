@@ -5,13 +5,14 @@
     home.stateVersion = osConfig.system.stateVersion;
     
     programs.home-manager.enable = true;
+
+
     home.pointerCursor = {
         gtk.enable = true;
         name = "GoogleDot-Blue";
         package = pkgs.google-cursor;
         size = 20;
     };
-
     gtk = {
         enable = true;
         cursorTheme = {
