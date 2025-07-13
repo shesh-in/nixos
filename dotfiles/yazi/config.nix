@@ -28,11 +28,6 @@
                     {
                         run = "pinta \"\$@\"";
                         orphan = true;
-                        name = "*.JPG";
-                    }
-                    {
-                        run = "pinta \"\$@\"";
-                        orphan = true;
                         name = "*.jpeg";
                     }
                 ];

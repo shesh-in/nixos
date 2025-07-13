@@ -55,6 +55,8 @@
 
         lutris
 
+        gimp3
+
     ];
 
 
