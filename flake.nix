@@ -82,7 +82,6 @@
 
                         ./dotfiles/wofi/1920x1200.nix
 
-                        ./options/xdg.nix
                       ];
                     };
                 };
